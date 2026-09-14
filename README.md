@@ -1,4 +1,6 @@
-# Calculator-
+# Calculator-simple
+**Was written for fun in 3 hours** not so fast but hey it's working!
+
 Works fine with non negative numbers like:
 ```
   5 - 7
