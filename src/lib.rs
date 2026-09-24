@@ -57,17 +57,20 @@ pub fn solve(input: String) -> Result<f64, ()> {
 
     let mut item: String = String::new();
     for ch in input {
-        if ch.is_numeric() || ch == '.' || ch == '-' {
+        if ch.is_numeric() || ch == '.' {
             item.push(ch);
         }
         if !ch.is_numeric() {
-            if ch == '.' || ch == '-' {
+            if ch == '.' {
                 continue;
+            }
+            if !item.is_empty() {
+                equation.push(item.clone());
+                item.clear();
+            }
+            if ch == '-' {
+                item.push(ch);
             } else {
-                if !item.is_empty() {
-                    equation.push(item.clone());
-                    item.clear();
-                }
                 equation.push(ch.to_string());
             }
         }
