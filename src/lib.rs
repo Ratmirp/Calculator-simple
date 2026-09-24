@@ -40,7 +40,7 @@ fn simple_solve(mut e: Vec<String>) -> f64 {
 
         e.splice((index - 1)..=(index + 1), vec![ans.to_string()]);
     }
-
+    //println!("{e:?}");
     let mut final_number: f64 = 0.0;
     for last in e {
         //println!("{last}");
@@ -57,17 +57,17 @@ pub fn solve(input: String) -> Result<f64, ()> {
 
     let mut item: String = String::new();
     for ch in input {
-        if ch.is_numeric() {
+        if ch.is_numeric() || ch == '.' || ch == '-' {
             item.push(ch);
         }
         if !ch.is_numeric() {
-            if !item.is_empty() {
-                equation.push(item.clone());
-                item.clear();
-            }
-            if ch == '-' || ch == '.' {
-                item.push(ch);
+            if ch == '.' || ch == '-' {
+                continue;
             } else {
+                if !item.is_empty() {
+                    equation.push(item.clone());
+                    item.clear();
+                }
                 equation.push(ch.to_string());
             }
         }
@@ -75,6 +75,7 @@ pub fn solve(input: String) -> Result<f64, ()> {
     if !item.is_empty() {
         equation.push(item);
     }
+    //println!("{equation:?}");
     while equation.contains(&String::from("(")) {
         let mut brackets: Vec<(i32, i32, i32)> = Vec::new();
         let mut open_stack = Vec::new();
